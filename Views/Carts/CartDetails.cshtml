@@ -1,0 +1,75 @@
+﻿
+@model IEnumerable<FoodOrderingSystem.Models.Cart>
+@{
+    ViewBag.Title = "CartDetails";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+    FoodOrderingSystem.Models.FoodOrderingSystemDbContext db = new FoodOrderingSystem.Models.FoodOrderingSystemDbContext();
+}
+
+<h2>Cart Items</h2>
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerId)
+        </th>
+        <th>
+        @Html.DisplayNameFor(model => model.Customer.CustomerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MenuList.ItemId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MenuList.ItemName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </th>
+  
+    </tr>
+
+    <tbody>
+        @foreach (var cart in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => cart.CustomerId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => cart.Customer.CustomerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => cart.ItemId)
+                </td>
+                <td>
+                    @{
+                        FoodOrderingSystem.Models.MenuList Items = db.MenuList.Find(cart.ItemId);
+                        string itemName = Items.ItemName;
+                    }
+                    @itemName
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => cart.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => cart.TotalAmount)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "UpdateCart","Carts", new {id=cart.ItemId},null) |
+                    @Html.ActionLink("Delete", "Delete", "Carts", new {id = cart.ItemId},null)
+                </td>
+            </tr>
+            
+        }
+    </tbody>
+</table>
+<p>
+    @Html.ActionLink("Back to MenuList", "MenuListCustomer", "Home")
+    @Html.ActionLink("CheckOut", "Create", "Orders" )
+</p>
+
+

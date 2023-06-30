@@ -1,0 +1,60 @@
+﻿@model IEnumerable<FoodOrderingSystem.Models.MenuList>
+
+@{
+    ViewBag.Title = "MenuListCustomer";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+
+<table class="table">
+    <tr>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Subcategory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+    
+    @foreach (var item in Model)
+    {
+        <tr>
+            @Html.HiddenFor(modelItem => item.ItemId)
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subcategory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+
+                @Html.ActionLink("Details", "Details", "MenuLists", new { id = item.ItemId }, null) |
+                @Html.ActionLink("AddToCart", "AddToCart", "Carts", new { id= item.ItemId  }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+

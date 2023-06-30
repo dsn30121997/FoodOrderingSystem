@@ -1,0 +1,40 @@
+﻿@model FoodOrderingSystem.Models.Admin
+
+@{
+    ViewBag.Title = "AdminLogin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AdminLogin</h2>
+@using (Html.BeginForm("AdminLogin", "Home", FormMethod.Post))
+
+{
+
+<table class="table table-bordered">
+
+    <tr>
+
+        <td>@Html.LabelFor(m => m.Email)</td>
+
+        <td>@Html.TextBoxFor(m => m.Email)</td>
+
+    </tr>
+
+    <tr>
+
+        <td>@Html.LabelFor(m => m.Password)</td>
+
+        <td>@Html.PasswordFor(m => m.Password)</td>
+
+    </tr>
+
+    <tr>
+
+        <td></td>
+
+        <td><button type="submit">Sign In</button></td>
+
+    </tr>
+
+</table>
+}
