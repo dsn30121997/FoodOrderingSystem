@@ -126,7 +126,7 @@ namespace FoodOrderingSystem.Controllers
 
 
 
-        //Optimized
+        
 
         public ActionResult Delete(int CustomerId, int ItemId)
         {
@@ -135,7 +135,12 @@ namespace FoodOrderingSystem.Controllers
             return RedirectToAction("CartDetails", new { CustomerId });
         }
 
-        //Possible bug: The RedirectToAction method should have three parameters, but only two are provided.
+        public ActionResult DeleteAll(int CustomerId)
+        {
+            db.Cart.Remove(db.Cart.Find(CustomerId));
+            db.SaveChanges();
+            return RedirectToAction("CartDetails", new { CustomerId });
+        }
 
 
 
@@ -268,16 +273,16 @@ namespace FoodOrderingSystem.Controllers
         //    return View(cart);
         //}
 
-        // POST: Carts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(int id)
-        {
-            Cart cart = await db.Cart.FindAsync(id);
-            db.Cart.Remove(cart);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
+        //// POST: Carts/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> DeleteConfirmed(int id)
+        //{
+        //    Cart cart = await db.Cart.FindAsync(id);
+        //    db.Cart.Remove(cart);
+        //    await db.SaveChangesAsync();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

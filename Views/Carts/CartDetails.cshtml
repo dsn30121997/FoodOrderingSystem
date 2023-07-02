@@ -4,6 +4,7 @@
     ViewBag.Title = "CartDetails";
     Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
     FoodOrderingSystem.Models.FoodOrderingSystemDbContext db = new FoodOrderingSystem.Models.FoodOrderingSystemDbContext();
+
 }
 
 <h2>Cart Items</h2>
@@ -14,7 +15,7 @@
             @Html.DisplayNameFor(model => model.CustomerId)
         </th>
         <th>
-        @Html.DisplayNameFor(model => model.Customer.CustomerName)
+            @Html.DisplayNameFor(model => model.Customer.CustomerName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.MenuList.ItemId)
@@ -28,7 +29,10 @@
         <th>
             @Html.DisplayNameFor(model => model.TotalAmount)
         </th>
-  
+        <th>
+
+        </th>
+
     </tr>
 
     <tbody>
@@ -59,17 +63,21 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Edit", "UpdateCart", "Carts", new {cart.CustomerId,cart.ItemId}, null) |
-                    @Html.ActionLink("Delete", "Delete", "Carts", new { cart.CustomerId, cart.ItemId },null)
+                    @Html.ActionLink("Edit", "UpdateCart", "Carts", new { cart.CustomerId, cart.ItemId }, null) |
+                    @Html.ActionLink("Delete", "Delete", "Carts", new { cart.CustomerId, cart.ItemId }, null)
                 </td>
             </tr>
-            
+
         }
+
+
+        @*@Html.ActionLink("Empty cart", "DeleteAll", "Carts", new { }, null)*@
+
     </tbody>
+
 </table>
+
 <p>
     @Html.ActionLink("Back to MenuList", "MenuListCustomer", "Home")
-    @Html.ActionLink("CheckOut", "Create", "Orders" )
+    @Html.ActionLink("CheckOut", "Create", "Orders")
 </p>
-
-
