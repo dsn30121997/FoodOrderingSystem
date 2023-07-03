@@ -53,7 +53,7 @@ namespace FoodOrderingSystem.Controllers
             {
                 db.Customer.Add(customer);
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Login","Home");
             }
 
             return View(customer);

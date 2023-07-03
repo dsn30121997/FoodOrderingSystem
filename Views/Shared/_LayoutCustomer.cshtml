@@ -36,7 +36,7 @@ window.onunload=function(){null};</script>
                         <li>@Html.ActionLink("Home", "MenuListCustomer", "Home") |</li>
                         <li>@Html.ActionLink("Details", "Details", "CustomersDetails", new { id = Id }, null) |</li>
                         <li>@Html.ActionLink("Cart", "CartDetails", "Carts", new { CustomerId = Id }, null) |</li>
-                        <li>@Html.ActionLink("My Orders", "Details", "Orders", new{id = Id}, null) |</li>
+                        <li>@Html.ActionLink("My Orders", "MyOrders", "Orders", new{ CustomerId = Id}, null) |</li>
                         <li>@Html.ActionLink("Sign Out", "LogOut", "Home") |</li>
                     </ul>
                 </div>

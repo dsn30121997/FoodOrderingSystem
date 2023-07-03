@@ -26,7 +26,18 @@ namespace FoodOrderingSystem.Controllers
             return View(await orders.ToListAsync());
         }
 
-       
+        //For getting All Order By single customer
+        // Get Orders/MyOrders/2
+        // Get Orders/MyOrders/Customer Id
+        public ActionResult MyOrders (int CustomerId)
+        {
+            Customer customer = db.Customer.Find(CustomerId);
+            List<Orders> orders = db.Orders.Where(c =>  c.CustomerId == CustomerId).ToList();
+            return View(orders);
+        }
+
+
+
         //For getting Orders Details
         // GET: Orders/Details/5
         public async Task<ActionResult> Details(int? id)

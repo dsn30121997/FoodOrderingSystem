@@ -130,6 +130,7 @@
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MenuListsController.cs" />
+    <Compile Include="Controllers\OrderItemsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -243,6 +244,8 @@
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Carts\CartDetails.cshtml" />
     <Content Include="Views\Carts\UpdateCart.cshtml" />
+    <Content Include="Views\Orders\MyOrders.cshtml" />
+    <Content Include="Views\OrderItems\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
