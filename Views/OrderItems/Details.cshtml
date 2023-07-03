@@ -1,0 +1,80 @@
+﻿@model IEnumerable<FoodOrderingSystem.Models.OrderItems>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+    FoodOrderingSystem.Models.FoodOrderingSystemDbContext db = new FoodOrderingSystem.Models.FoodOrderingSystemDbContext();
+
+}
+
+<h2>Order Details</h2>
+
+<table class="table">
+
+    <tr>
+        <th>
+
+            @Html.DisplayNameFor(model => model.ItemId)
+            @Html.DisplayNameFor(model => model.MenuList.ItemName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Orders.TotalAmount)
+        </th>
+
+    </tr>
+
+    <tbody>
+        @foreach (var Item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        FoodOrderingSystem.Models.MenuList Items = db.MenuList.Find(Item.ItemId);
+                        string itemName = Items.ItemName;
+                    }
+                    @itemName
+    
+                <td>
+                    @Html.DisplayFor(modelItem => Item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Item.ItemStatus)
+                </td>
+
+                
+
+
+            </tr>
+
+        }
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+
+        <td>
+            
+            @{
+                FoodOrderingSystem.Models.Orders orders = db.Orders.Find(Model.First().Orders.OrderId);
+                decimal TotalAmount = orders.TotalAmount;
+            }
+            <b> @TotalAmount</b>
+
+        </td>
+
+
+
+    </tr>
+
+    </tbody>
+
+</table>
+
+    
+

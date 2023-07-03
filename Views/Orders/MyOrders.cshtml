@@ -1,0 +1,89 @@
+﻿@model IEnumerable<FoodOrderingSystem.Models.Orders>
+
+@{
+    ViewBag.Title = "MyOrders";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+    FoodOrderingSystem.Models.FoodOrderingSystemDbContext db = new FoodOrderingSystem.Models.FoodOrderingSystemDbContext();
+
+}
+
+<h2>MyOrders</h2>
+
+    <h4>Orders</h4>
+
+    <table class=" table">
+
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer.CustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderId)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalAmount)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDate)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderStatus)
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SpicialInstruction)
+            </th>
+            <th>
+        </tr>
+
+        <tbody>
+
+            @foreach (var order in Model)
+            {
+                <tr>
+
+                    <td>
+                        
+                        @{ 
+                            FoodOrderingSystem.Models.Customer customer = db.Customer.Find(order.CustomerId);
+                            string customerName = customer.CustomerName;
+                        }
+                        @customerName
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => order.OrderId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => order.TotalAmount)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => order.OrderDate)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => order.OrderStatus)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => order.SpicialInstruction)
+
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Details", "Details", "OrderItems", new {order.OrderId},null)
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+
+
+    </table>
+<p>
+  
+    @Html.ActionLink("Back to MenuList", "MenuListCustomer", "Home")
+</p>
