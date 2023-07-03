@@ -14,7 +14,7 @@ namespace FoodOrderingSystem.Models
         //[ForeignKey("Cart"), Column(Order = 5)]
         [DataType(DataType.Currency)]
         public decimal TotalAmount { get; set; }
-        [DataType(DataType.DateTime), DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DataType(DataType.DateTime)]
         public DateTime OrderDate { get; set; }
         [MaxLength(20)]
         public string OrderStatus { get; set; }

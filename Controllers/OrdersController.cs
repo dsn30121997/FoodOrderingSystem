@@ -15,6 +15,10 @@ namespace FoodOrderingSystem.Controllers
     {
         private FoodOrderingSystemDbContext db = new FoodOrderingSystemDbContext();
 
+
+
+
+
         // GET: Orders
         public async Task<ActionResult> Index()
         {
@@ -22,6 +26,8 @@ namespace FoodOrderingSystem.Controllers
             return View(await orders.ToListAsync());
         }
 
+       
+        //For getting Orders Details
         // GET: Orders/Details/5
         public async Task<ActionResult> Details(int? id)
         {
@@ -38,41 +44,62 @@ namespace FoodOrderingSystem.Controllers
             return View(orders);
         }
 
-        // GET: Orders/Create
-        //public ActionResult Create()
-        //{
-        //    ViewBag.CustomerId = new SelectList(db.Customer, "CustomerId", "CustomerName");
-        //    return View();
-        //}
+
+
+        
+       // For getting Customers Instruction
+       // GET: Orders/Create
+        public ActionResult Create()
+        {
+            ViewBag.CustomerId = new SelectList(db.Customer, "CustomerId", "CustomerName");
+            return View();
+        }
+
+
+        // Creating New order Adding Data to Order Table
 
         // POST: Orders/Create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(int CustomerId,Orders orders)
+        public async Task<ActionResult> Create([Bind(Include = "OrderId,CustomerId,TotalAmount,OrderDate,OrderStatus,SpicialInstruction")] Orders orders)
         {
             if (Session["Id"] != null)
             {
-                ViewBag.CustomerId = Session["Id"];
-                
+                int CustomerId = (int)Session["Id"];
                 Customer customer = await db.Customer.FindAsync(CustomerId);
+                //Getting complet List Of items from Cart
                 List<Cart> carts = db.Cart.Where(c => c.CustomerId == CustomerId).ToList();
                 MenuList menuList = new MenuList();
-                
                 orders.CustomerId = customer.CustomerId;
-                //orders.TotalAmount =;
-                orders.OrderDate = DateTime.Now;
+                // Logic for Total Amount that need to pay 
+                // Ordered Total Price
+                foreach (var item in carts)
+                {
+                    orders.TotalAmount += item.TotalAmount;
+                }
                 orders.OrderStatus = "Recived Order";
-                
                 db.Orders.Add(orders);
+                orders.OrderDate = DateTime.Now;
                 await db.SaveChangesAsync();
 
+                //Adding Each Item in Ordered Items and               
+                foreach (var item in carts)
+                {
+                    OrderItems orderItems = new OrderItems();
+                    orderItems.OrderId = orders.OrderId;
+                    orderItems.ItemId = item.ItemId;
+                    orderItems.Quantity = item.Quantity;
+                    orderItems.ItemStatus = "Recived Order";
+                    db.Entry(orderItems).State = EntityState.Added;
+                    db.SaveChanges();
 
-
-
-                return RedirectToAction("Index");
+                    //Deleting Items From Cart
+                    db.Cart.Remove(db.Cart.Find(CustomerId, item.ItemId));
+                    db.SaveChanges();
+                }
+                return RedirectToAction("MenuListCustomer", "Home");
             }
-
             ViewBag.CustomerId = new SelectList(db.Customer, "CustomerId", "CustomerName", orders.CustomerId);
             return View(orders);
         }
@@ -103,6 +130,7 @@ namespace FoodOrderingSystem.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(orders).State = EntityState.Modified;
+
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

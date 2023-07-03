@@ -138,6 +138,10 @@
     <Compile Include="Migrations\202306301037264_Added.designer.cs">
       <DependentUpon>202306301037264_Added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202307020841018_OrderDatechange.cs" />
+    <Compile Include="Migrations\202307020841018_OrderDatechange.designer.cs">
+      <DependentUpon>202307020841018_OrderDatechange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\FoodOrderingSystem.cs" />
     <Compile Include="Migrations\FoodOrderingSystem.designer.cs">
       <DependentUpon>FoodOrderingSystem.cs</DependentUpon>
@@ -273,6 +277,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202306301037264_Added.resx">
       <DependentUpon>202306301037264_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202307020841018_OrderDatechange.resx">
+      <DependentUpon>202307020841018_OrderDatechange.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\FoodOrderingSystem.resx">
       <DependentUpon>FoodOrderingSystem.cs</DependentUpon>
