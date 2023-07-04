@@ -23,6 +23,13 @@ namespace FoodOrderingSystem.Controllers
         //Carts/AddToCart/itemId
         public ActionResult AddToCart(int id)
         {
+            int customerId = (int)Session["Id"];
+            Cart existingCartItem = db.Cart.FirstOrDefault(c => c.CustomerId == customerId && c.ItemId == id);
+
+            if (existingCartItem != null)
+            {
+                return RedirectToAction("CartDetails", new { CustomerId = customerId });
+            }
             MenuList ml = db.MenuList.Find(id);
             Cart obj = new Cart();
             obj.CustomerId = (int)Session["Id"];
@@ -32,6 +39,8 @@ namespace FoodOrderingSystem.Controllers
             obj.TotalAmount = ml.Price * obj.Quantity;
             db.Cart.Add(obj);
             db.SaveChanges();
+            
+            
             return RedirectToAction("CartDetails", new { obj.CustomerId });
         }
 
@@ -142,6 +151,11 @@ namespace FoodOrderingSystem.Controllers
             return RedirectToAction("CartDetails", new { CustomerId });
         }
 
+        private bool IsItemInCart(int itemId, int customerId)
+        {
+            var carts = db.Cart.Where(c => c.CustomerId == customerId).ToList();
+            return carts.Any(c => c.ItemId == itemId);
+        }
 
 
 

@@ -6,6 +6,7 @@
 }
 
 
+
 <table class="table">
     <tr>
 
@@ -27,12 +28,12 @@
         </th>
         <th></th>
     </tr>
-    
+
     @foreach (var item in Model)
     {
         <tr>
             @Html.HiddenFor(modelItem => item.ItemId)
-            
+
             <td>
                 @Html.DisplayFor(modelItem => item.ItemName)
             </td>
@@ -50,8 +51,8 @@
             </td>
             <td>
 
-                @Html.ActionLink("Details", "Details", "MenuLists", new { id = item.ItemId }, null) |
-                @Html.ActionLink("AddToCart", "AddToCart", "Carts", new { id= item.ItemId  }, null)
+                @Html.ActionLink("Details", "Details", "MenuLists", new { id = item.ItemId }, new { @class = "btn btn-primary white-text" })
+                @Html.ActionLink("AddToCart", "AddToCart", "Carts", new { id = item.ItemId }, new { @class = "btn btn-success" })
             </td>
         </tr>
     }

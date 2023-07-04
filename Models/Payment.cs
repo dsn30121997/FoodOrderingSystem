@@ -15,7 +15,7 @@ namespace FoodOrderingSystem.Models
         public decimal TotalAmount { get; set; }
         [Required,MaxLength(15)]
         public string PaymentMethod { get; set; }
-        [Required, DataType(DataType.DateTime),DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required, DataType(DataType.DateTime)]
         public DateTime PaymentDate { get; set; }
 
 

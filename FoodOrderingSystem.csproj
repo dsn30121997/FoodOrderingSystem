@@ -132,6 +132,7 @@
     <Compile Include="Controllers\MenuListsController.cs" />
     <Compile Include="Controllers\OrderItemsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\PaymentsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -142,6 +143,10 @@
     <Compile Include="Migrations\202307020841018_OrderDatechange.cs" />
     <Compile Include="Migrations\202307020841018_OrderDatechange.designer.cs">
       <DependentUpon>202307020841018_OrderDatechange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202307031721467_update Date in Payment.cs" />
+    <Compile Include="Migrations\202307031721467_update Date in Payment.designer.cs">
+      <DependentUpon>202307031721467_update Date in Payment.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\FoodOrderingSystem.cs" />
     <Compile Include="Migrations\FoodOrderingSystem.designer.cs">
@@ -246,6 +251,8 @@
     <Content Include="Views\Carts\UpdateCart.cshtml" />
     <Content Include="Views\Orders\MyOrders.cshtml" />
     <Content Include="Views\OrderItems\Details.cshtml" />
+    <Content Include="Views\Payments\Create.cshtml" />
+    <Content Include="Views\Payments\Success.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -283,6 +290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202307020841018_OrderDatechange.resx">
       <DependentUpon>202307020841018_OrderDatechange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202307031721467_update Date in Payment.resx">
+      <DependentUpon>202307031721467_update Date in Payment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\FoodOrderingSystem.resx">
       <DependentUpon>FoodOrderingSystem.cs</DependentUpon>

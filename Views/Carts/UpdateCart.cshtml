@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Cart</h4>
         <hr />
@@ -28,9 +28,9 @@
         </div>
 
         <div class="form-group">
-          
-                @Html.HiddenFor(model => model.TotalAmount)
-            
+
+            @Html.HiddenFor(model => model.TotalAmount)
+
         </div>
 
         <div class="form-group">
@@ -40,4 +40,16 @@
         </div>
     </div>
 }
-
+@section Scripts {
+    <script>
+        $(function() {
+            $("form").submit(function() {
+                var quantity = parseInt($("#Quantity").val());
+                if (quantity <= 0) {
+                    alert("Quantity should be greater than 0.");
+                    return false; // Prevent form submission
+                }
+            });
+        });
+    </script>
+}

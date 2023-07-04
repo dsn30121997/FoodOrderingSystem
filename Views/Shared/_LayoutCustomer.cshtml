@@ -31,10 +31,14 @@ window.onunload=function(){null};</script>
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li style="background-color:aqua">
-                            Welcome @((String)Session["Name"].ToString())
-                        </li>
+                            @if (Session["Name"] != null)
+                            {
+                                <b>Welcome @((String)Session["Name"].ToString())</b>
+                            }
+                                                
+                                            </li>
                         <li>@Html.ActionLink("Home", "MenuListCustomer", "Home") |</li>
-                        <li>@Html.ActionLink("Details", "Details", "CustomersDetails", new { id = Id }, null) |</li>
+                        <li>@Html.ActionLink("Details", "Details", "Customers", new { id = Id }, null) |</li>
                         <li>@Html.ActionLink("Cart", "CartDetails", "Carts", new { CustomerId = Id }, null) |</li>
                         <li>@Html.ActionLink("My Orders", "MyOrders", "Orders", new{ CustomerId = Id}, null) |</li>
                         <li>@Html.ActionLink("Sign Out", "LogOut", "Home") |</li>
