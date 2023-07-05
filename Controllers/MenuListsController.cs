@@ -14,7 +14,7 @@ namespace FoodOrderingSystem.Controllers
     public class MenuListsController : Controller
     {
         private FoodOrderingSystemDbContext db = new FoodOrderingSystemDbContext();
-
+        //Admin
         // GET: MenuLists
         public async Task<ActionResult> Index()
         {

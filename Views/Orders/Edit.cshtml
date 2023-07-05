@@ -2,7 +2,9 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    FoodOrderingSystem.Models.FoodOrderingSystemDbContext db = new FoodOrderingSystem.Models.FoodOrderingSystemDbContext();
+
 }
 
 <h2>Edit</h2>
@@ -10,39 +12,49 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
 <div class="form-horizontal">
     <h4>Orders</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.OrderId)
+
     @Html.HiddenFor(model => model.CustomerId)
     @Html.HiddenFor(model => model.TotalAmount)
     @Html.HiddenFor(model => model.OrderDate)
     @Html.HiddenFor(model => model.SpicialInstruction)
-    < div class="form-group">
-        @Html.LabelFor(model => model.CustomerId, "CustomerId", htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.HiddenFor(model => model.OrderId)
+
+    @Html.DisplayNameFor(model => model.OrderId)
+    <br />
+    <b>@Html.DisplayFor(model => model.OrderId)</b>
+    <br />
+    <br />
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.OrderStatus, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            </div>
+            @Html.DropDownListFor(model => model.OrderStatus, new SelectList(
+                new[]
+                {
+                    "Order Received",
+                    "Order Preparing",
+                    "Order is Ready",
+                    "Order is Pickup"
+                }), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.OrderStatus, "", new { @class = "text-danger" })
+        </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.OrderStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-                < div class= "col-md-10" >
-                    @Html.EditorFor(model => model.OrderStatus, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.OrderStatus, "", new { @class = "text-danger" })
-                </ div >
-            </ div >
 
-           
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
-                </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
-        }
+    </div>
+</div>
+}
 
-        <div>
-            @Html.ActionLink("Back to List", "Index")e
-        </div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

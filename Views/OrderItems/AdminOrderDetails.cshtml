@@ -1,0 +1,87 @@
+﻿@model IEnumerable<FoodOrderingSystem.Models.OrderItems>
+
+@{
+    ViewBag.Title = "AdminOrderDetails";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+
+    FoodOrderingSystem.Models.FoodOrderingSystemDbContext db = new FoodOrderingSystem.Models.FoodOrderingSystemDbContext();
+    int? orderId = ViewBag.OrderId as int?;
+}
+
+<h2>Order Details - Order ID: @orderId</h2>
+<table class="table">
+    <tr>
+        
+        
+
+    </tr>
+    <tr>
+        <th>
+
+
+            @Html.DisplayNameFor(model => model.MenuList.ItemName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ItemStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Orders.TotalAmount)
+        </th>
+        <th>Actions</th>
+
+    </tr>
+
+    <tbody>
+        @foreach (var Item in Model)
+        {
+            <tr>
+                <td>
+                    @{
+                        FoodOrderingSystem.Models.MenuList Items = db.MenuList.Find(Item.ItemId);
+                        string itemName = Items.ItemName;
+                    }
+                    @itemName
+
+                <td>
+                    @Html.DisplayFor(modelItem => Item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Item.ItemStatus)
+                </td>
+                <td></td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })
+                </td>
+
+
+            </tr>
+
+        }
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+
+        <td>
+
+            @{
+                FoodOrderingSystem.Models.Orders orders = db.Orders.Find(Model.First().Orders.OrderId);
+                decimal TotalAmount = orders.TotalAmount;
+            }
+            <b> @TotalAmount</b>
+
+        </td>
+        <td></td>
+
+
+    </tr>
+
+    </tbody>
+
+</table>
+<p>
+    @Html.ActionLink("Back to List", "Index","Orders")
+</p>

@@ -17,7 +17,9 @@ namespace FoodOrderingSystem.Controllers
             return View();
         }
 
-
+        //For Customer
+        // Get OrderItems/Details/1
+        // Get OrderItems/Details/OrderId
         public ActionResult Details(int OrderId)
         {
             Orders orders = db.Orders.Find(OrderId);
@@ -27,10 +29,20 @@ namespace FoodOrderingSystem.Controllers
 
         }
 
-        
 
+        //For Admin
 
-
+        // Get OrderItems/AdminOrderDetails/1
+        // Get OrderItems/AdminOrderDetails/OrderId
+        public ActionResult AdminOrderDetails(int OrderId)
+        {
+            Orders orders = db.Orders.Find(OrderId);
+            //OrderItems orderItem = db.OrderItems.Find(OrderId);
+            List<OrderItems> AdminOrderItems = db.OrderItems.Where(oI => oI.OrderId == OrderId).ToList();
+            ViewBag.OrderId = OrderId;
+            return View(AdminOrderItems);
+            
+        }
 
 
     }

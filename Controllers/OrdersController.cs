@@ -18,11 +18,12 @@ namespace FoodOrderingSystem.Controllers
 
 
 
-
+        // For Admin
         // GET: Orders
         public async Task<ActionResult> Index()
         {
             var orders = db.Orders.Include(o => o.Customer);
+             var orders1 = orders.OrderByDescending(o => o.OrderDate);
             return View(await orders.ToListAsync());
         }
 
@@ -140,8 +141,8 @@ namespace FoodOrderingSystem.Controllers
     }
 
 
-
-
+    //For Admin
+    // Getting Edit Page
     // GET: Orders/Edit/5
     public async Task<ActionResult> Edit(int? id)
     {
@@ -157,7 +158,7 @@ namespace FoodOrderingSystem.Controllers
         ViewBag.CustomerId = new SelectList(db.Customer, "CustomerId", "CustomerName", orders.CustomerId);
         return View(orders);
     }
-
+    //For Admin
     // POST: Orders/Edit/5
     // To protect from overposting attacks, enable the specific properties you want to bind to, for 
     // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -175,6 +176,8 @@ namespace FoodOrderingSystem.Controllers
         ViewBag.CustomerId = new SelectList(db.Customer, "CustomerId", "CustomerName", orders.CustomerId);
         return View(orders);
     }
+
+
 
     // GET: Orders/Delete/5
     public async Task<ActionResult> Delete(int? id)
