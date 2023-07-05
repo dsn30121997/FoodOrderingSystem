@@ -253,6 +253,10 @@
     <Content Include="Views\OrderItems\Details.cshtml" />
     <Content Include="Views\Payments\Create.cshtml" />
     <Content Include="Views\Payments\Success.cshtml" />
+    <Content Include="Views\MenuLists\AdminMenuDetails.cshtml" />
+    <Content Include="Views\Customers\AdminCustomerCreate.cshtml" />
+    <Content Include="Views\Customers\AdminCustomerDetails.cshtml" />
+    <Content Include="Views\Customers\AdminCustomerEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -8,7 +8,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "AdminCustomerCreate")
 </p>
 <table class="table">
     <tr>
@@ -48,8 +48,8 @@
             @Html.DisplayFor(modelItem => item.Password)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CustomerId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CustomerId }) |
+            @Html.ActionLink("Edit", "AdminCustomerEdit", new { id=item.CustomerId }) |
+            @Html.ActionLink("Details", "AdminCustomerDetails", new { id=item.CustomerId }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.CustomerId })
         </td>
     </tr>

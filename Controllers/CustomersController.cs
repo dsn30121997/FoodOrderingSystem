@@ -14,7 +14,7 @@ namespace FoodOrderingSystem.Controllers
     public class CustomersController : Controller
     {
         private FoodOrderingSystemDbContext db = new FoodOrderingSystemDbContext();
-
+        //For Admin
         // GET: Customers
         public async Task<ActionResult> Index()
         {
@@ -35,6 +35,25 @@ namespace FoodOrderingSystem.Controllers
             }
             return View(customer);
         }
+
+        // For Admin 
+        // GET: Customers/Details/5
+        public async Task<ActionResult> AdminCustomerDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = await db.Customer.FindAsync(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+
+
+
 
         // GET: Customers/Create
         public ActionResult Create()
@@ -58,6 +77,33 @@ namespace FoodOrderingSystem.Controllers
 
             return View(customer);
         }
+
+        // For Admin
+        // Getting Create Customer Page
+        public ActionResult AdminCustomerCreate()
+        {
+            return View();
+        }
+
+        // For Admin
+        // POST: Customers/AdminCustomerCreate
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AdminCustomerCreate([Bind(Include = "CustomerId,CustomerName,Email,Phone,Address,Password")] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Customer.Add(customer);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            return View(customer);
+        }
+
+
 
         // GET: Customers/Edit/5
         public async Task<ActionResult> Edit(int? id)
@@ -89,6 +135,44 @@ namespace FoodOrderingSystem.Controllers
             }
             return View(customer);
         }
+
+
+        //For Admin
+        // GET: Customers/AdminCustomerEdit/5
+        public async Task<ActionResult> AdminCustomerEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = await db.Customer.FindAsync(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
+        //For Admin 
+        // POST: Customers/AdminCustomerEdit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AdminCustomerEdit([Bind(Include = "CustomerId,CustomerName,Email,Phone,Address,Password")] Customer customer)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(customer).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View(customer);
+        }
+
+
+
+
+
 
         // GET: Customers/Delete/5
         public async Task<ActionResult> Delete(int? id)

@@ -36,6 +36,25 @@ namespace FoodOrderingSystem.Controllers
             return View(menuList);
         }
 
+
+        //for Admin
+        //getting Item Details
+        // Get MenuList/AdminMenuDetails
+        public async Task<ActionResult> AdminMenuDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            MenuList menuList = await db.MenuList.FindAsync(id);
+            if (menuList == null)
+            {
+                return HttpNotFound();
+            }
+            return View(menuList);
+        }
+
+
         // GET: MenuLists/Create
         public ActionResult Create()
         {

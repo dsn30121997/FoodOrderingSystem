@@ -1,11 +1,11 @@
 ﻿@model FoodOrderingSystem.Models.Customer
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "AdminCustomerEdit";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>AdminCustomerEdit</h2>
 
 
 @using (Html.BeginForm())
@@ -66,6 +66,9 @@
     </div>
 }
 
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
