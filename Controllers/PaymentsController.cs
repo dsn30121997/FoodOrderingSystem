@@ -1,7 +1,9 @@
 ﻿using FoodOrderingSystem.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -10,6 +12,15 @@ namespace FoodOrderingSystem.Controllers
     public class PaymentsController : Controller
     {
        private FoodOrderingSystemDbContext db = new FoodOrderingSystemDbContext();
+
+
+        //For Admin
+        public async Task<ActionResult> Index()
+        {
+            
+            return View(await db.Payment.ToListAsync());
+        }
+
 
 
        // Getting Payment Page

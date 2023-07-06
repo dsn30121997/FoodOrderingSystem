@@ -11,14 +11,12 @@
 <h2>Order Details - Order ID: @orderId</h2>
 <table class="table">
     <tr>
-        
-        
-
     </tr>
     <tr>
         <th>
 
 
+            @*@Html.DisplayNameFor(model => model.OrderId)*@
             @Html.DisplayNameFor(model => model.MenuList.ItemName)
         </th>
         <th>
@@ -30,7 +28,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Orders.TotalAmount)
         </th>
-        <th>Actions</th>
+       
 
     </tr>
 
@@ -52,36 +50,36 @@
                     @Html.DisplayFor(modelItem => Item.ItemStatus)
                 </td>
                 <td></td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ })
-                </td>
+                
 
 
             </tr>
 
         }
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
 
-        <td>
+            <td>
 
-            @{
-                FoodOrderingSystem.Models.Orders orders = db.Orders.Find(Model.First().Orders.OrderId);
-                decimal TotalAmount = orders.TotalAmount;
-            }
-            <b> @TotalAmount</b>
+                @{
+                    FoodOrderingSystem.Models.Orders orders = db.Orders.Find(Model.First().Orders.OrderId);
+                    decimal TotalAmount = orders.TotalAmount;
+                }
+                <b> @TotalAmount</b>
 
-        </td>
-        <td></td>
+            </td>
+            <td></td>
 
 
-    </tr>
+        </tr>
 
     </tbody>
 
 </table>
+
+
 <p>
-    @Html.ActionLink("Back to List", "Index","Orders")
+    @Html.ActionLink("Back to List", "Index", "Orders")
 </p>

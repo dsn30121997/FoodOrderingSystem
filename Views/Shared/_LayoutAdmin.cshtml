@@ -3,10 +3,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    <script type="text/javascript">function preventBack(){window.history.forward();}
-setTimeout("preventBack()", 0);
-window.onunload=function(){null};</script>
+    <title>@ViewBag.Title - Food Ordering System</title>
+    <script type="text/javascript">
+        function preventBack() {
+            window.history.forward();
+        }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -14,39 +18,40 @@ window.onunload=function(){null};</script>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
         <div class="container">
             <div class="navbar-dark">
-                 @Html.ActionLink("Food Ordering System", "Login", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="nav navbar-nav navbar-right">
-
-                    <li style="background-color:aqua">
-
+                @Html.ActionLink("Food Ordering System", "Login", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                    <ul class="nav navbar-nav navbar-right" style="display: flex; align-items: center;">
                         @if (Session["Name"] != null)
                         {
-                            <b>Welcome Admin @((String)Session["Name"])</b>
+                            <li style="background-color: aqua; margin-right: 30px;">
+                                <b>Welcome Admin @((String)Session["Name"])</b>
+                            </li>
                         }
-
-                    </li>
-
-                    <li>@Html.ActionLink("Home", "Index", "MenuLists") |</li>
-                    <li>@Html.ActionLink("Customers", "Index", "Customers") |</li>
-                    <li>@Html.ActionLink("Employees", "Index", "Employees") |</li>
-                    <li>@Html.ActionLink("Orders", "Index", "Orders") |</li>
-                    <li>@Html.ActionLink("Sign Out", "LogOut", "Home") |</li>
-                </ul>
-                    
-</div>
-        </div>
+                        <li>@Html.ActionLink("Home", "Index", "MenuLists")</li>
+                        <li style="margin-left: 10px; margin-right: 10px;">|</li>
+                        <li>@Html.ActionLink("Customers", "Index", "Customers")</li>
+                        <li style="margin-left: 10px; margin-right: 10px;">|</li>
+                        <li>@Html.ActionLink("Employees", "Index", "Employees")</li>
+                        <li style="margin-left: 10px; margin-right: 10px;">|</li>
+                        <li>@Html.ActionLink("Orders", "Index", "Orders")</li>
+                        <li style="margin-left: 10px; margin-right: 10px;">|</li>
+                        <li>@Html.ActionLink("Payment History", "Index", "Payments")</li>
+                        <li style="margin-left: 10px; margin-right: 10px;">|</li>
+                        <li>@Html.ActionLink("Sign Out", "LogOut", "Home")</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </nav>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Food Ordering System</p>
         </footer>
     </div>
 

@@ -1,0 +1,39 @@
+﻿@model List<FoodOrderingSystem.Models.Payment>
+
+@{
+    ViewBag.Title = "Payment History";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="container">
+    <h2>Payment History</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Payment ID</th>
+                <th>Order ID</th>
+                <th>Payment Method</th>
+                <th>Total Amount</th>
+                <th>Payment Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var payment in Model)
+            {
+                <tr>
+                    
+                    <td>@payment.TransactionId</td>
+                    <td>@payment.OrderId</td>
+                    <td>@payment.PaymentMethod</td>
+                    <td>@payment.TotalAmount</td>
+                    <td>@payment.PaymentDate</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+   
+</div>
+
+                   

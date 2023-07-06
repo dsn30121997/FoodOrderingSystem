@@ -1,6 +1,7 @@
 ﻿using FoodOrderingSystem.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -42,6 +43,38 @@ namespace FoodOrderingSystem.Controllers
             ViewBag.OrderId = OrderId;
             return View(AdminOrderItems);
             
+        }
+
+        //For Admin 
+        // Get OrderItems/Edit/2
+        // Get OrderItems/Edit/ItemId
+        public ActionResult Edit(int OrderId)
+        {
+            OrderItems orderItems = db.OrderItems.FirstOrDefault(o => o.OrderId == OrderId);
+            return View(orderItems);
+        }
+
+
+        //For Admin 
+        // Get OrderItems/Edit
+        // Get OrderItems/Edit
+
+
+        [HttpPost]
+        public ActionResult Edit([Bind(Include = "OrderId,Quantity,ItemId,ItemStatus")] OrderItems orderItems)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(orderItems).State = EntityState.Modified;
+
+
+                
+                db.SaveChanges();
+
+                return RedirectToAction("Index", "Orders");
+            }
+
+            return View("Index", "MenuList");
         }
 
 
