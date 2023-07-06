@@ -35,13 +35,19 @@ window.onunload=function(){null};</script>
                             {
                                 <b>Welcome @((String)Session["Name"].ToString())</b>
                             }
-                                                
-                                            </li>
+
+                        </li>
                         <li>@Html.ActionLink("Home", "MenuListCustomer", "Home") |</li>
+                        <li style="margin-left: 10px; margin-right: 10px;">|</li>
                         <li>@Html.ActionLink("Details", "Details", "Customers", new { id = Id }, null) |</li>
+                        <li style="margin-left: 10px; margin-right: 10px;">|</li>
                         <li>@Html.ActionLink("Cart", "CartDetails", "Carts", new { CustomerId = Id }, null) |</li>
-                        <li>@Html.ActionLink("My Orders", "MyOrders", "Orders", new{ CustomerId = Id}, null) |</li>
+                        <li style="margin-left: 10px; margin-right: 10px;">|</li>
+                        <li>@Html.ActionLink("My Orders", "MyOrders", "Orders", new { CustomerId = Id }, null) |</li>
+                        <li style="margin-left: 10px; margin-right: 10px;">|</li>
                         <li>@Html.ActionLink("Sign Out", "LogOut", "Home") |</li>
+                        <li style="margin-left: 10px; margin-right: 10px;">|</li>
+
                     </ul>
                 </div>
             </div>

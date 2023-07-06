@@ -1,0 +1,65 @@
+﻿
+@{
+    int Id = 0;
+    if (Session["Id"] != null)
+    {
+        Id = (int)Session["Id"];
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Food Ordering Syste</title>
+
+    <script type="text/javascript">
+        function preventBack() {
+            window.history.forward();
+        }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom bg-dark">
+        <div class="col-md-3 mb-2 mb-md-0 ">
+            <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none text margin text-white-50 ">
+
+                <h3> Food Ordering System</h3>
+            </a>
+        </div>
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+
+            <li style="margin-left: 10px; margin-right: 10px;">|</li>
+            <li>@Html.ActionLink("Details", "EmployeeDetails", "Employees", new { Id }, null) |</li>
+            <li style="margin-left: 10px; margin-right: 10px;">|</li>
+
+            <li>@Html.ActionLink("Orders", "EmployeeOrdersIndex", "Orders") |</li>
+            <li style="margin-left: 10px; margin-right: 10px;">|</li>
+            <li>@Html.ActionLink("Sign Out", "LogOut", "Home") |</li>
+        </ul>
+
+        <div class="col-md-3 text-end text-white  ">
+            @if (Session["Name"] != null)
+            {
+                <b>Welcome Employee @((String)Session["Name"].ToString())</b>
+            }
+        </div>
+    </header>
+    <div class="container body-content">
+        @RenderBody()
+
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

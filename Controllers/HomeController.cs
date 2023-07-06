@@ -84,6 +84,39 @@ namespace FoodOrderingSystem.Controllers
             }
         }
 
+
+        
+        //For Employee
+
+        // GET: Home(return login page)
+        public ActionResult EmployeeLogin()
+        {
+            Employee login = new Employee();
+            return View(login);
+        }
+        //For Employee
+        //checking email and password for login Employee
+
+        [HttpPost]
+        public ActionResult EmployeeLogin(Employee model)
+        {
+            Employee login = db.Employee.Where(l => l.Email == model.Email && l.Password == model.Password).FirstOrDefault();
+            if (login != null)
+            {
+                Session.Add("Id", login.EmployeeId);
+                Session.Add("Name", login.EmployeeName);
+                Session.Add("SignInTime", DateTime.Now);
+                return RedirectToAction("EmployeeOrdersIndex", "Orders");
+            }
+            else
+            {
+                ViewBag.Message = "Error occured - Login Credentials are invalid !!";
+                return View("Error");
+            }
+        }
+
+
+
         //logout functionality
         public ActionResult LogOut()
         {

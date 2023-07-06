@@ -45,6 +45,28 @@ namespace FoodOrderingSystem.Controllers
             
         }
 
+        //For Employee
+
+        // Get OrderItems/EmployeeOrderDetails/1
+        // Get OrderItems/EmployeeOrderDetails/OrderId
+        public ActionResult EmployeeOrderDetails(int OrderId)
+        {
+            Orders orders = db.Orders.Find(OrderId);
+            //OrderItems orderItem = db.OrderItems.Find(OrderId);
+            List<OrderItems> AdminOrderItems = db.OrderItems.Where(oI => oI.OrderId == OrderId).ToList();
+            ViewBag.OrderId = OrderId;
+            return View(AdminOrderItems);
+
+        }
+
+
+
+
+
+
+
+
+
         //For Admin 
         // Get OrderItems/Edit/2
         // Get OrderItems/Edit/ItemId
@@ -66,14 +88,9 @@ namespace FoodOrderingSystem.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(orderItems).State = EntityState.Modified;
-
-
-                
                 db.SaveChanges();
-
                 return RedirectToAction("Index", "Orders");
             }
-
             return View("Index", "MenuList");
         }
 

@@ -14,7 +14,7 @@ namespace FoodOrderingSystem.Controllers
     public class EmployeesController : Controller
     {
         private FoodOrderingSystemDbContext db = new FoodOrderingSystemDbContext();
-
+        // For Admin
         // GET: Employees
         public async Task<ActionResult> Index()
         {
@@ -35,6 +35,25 @@ namespace FoodOrderingSystem.Controllers
             }
             return View(employee);
         }
+
+        // For Employee
+        //GET: Employees/Details/5
+        public async Task<ActionResult> EmployeeDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Employee employee = await db.Employee.FindAsync(id);
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+            return View(employee);
+        }
+
+
+
 
         // GET: Employees/Create
         public ActionResult Create()
@@ -89,6 +108,51 @@ namespace FoodOrderingSystem.Controllers
             }
             return View(employee);
         }
+
+
+
+
+        //Fpr Employee
+
+        // GET: Employees/Edit/5
+        public async Task<ActionResult> EmployeeEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Employee employee = await db.Employee.FindAsync(id);
+            if (employee == null)
+            {
+                return HttpNotFound();
+            }
+            return View(employee);
+        }
+
+        //Fpr Employee
+        // POST: Employees/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EmployeeEdit([Bind(Include = "EmployeeId,EmployeeName,Email,Phone,Address,Password")] Employee employee)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(employee).State = EntityState.Modified;
+                await db.SaveChangesAsync();
+                return RedirectToAction( "EmployeeOrdersIndex","Orders",employee.EmployeeId);
+            }
+            return View(employee);
+        }
+
+
+
+
+
+
+
+
 
         // GET: Employees/Delete/5
         public async Task<ActionResult> Delete(int? id)

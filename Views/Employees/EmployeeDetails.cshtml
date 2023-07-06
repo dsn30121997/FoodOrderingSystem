@@ -1,11 +1,11 @@
 ﻿@model FoodOrderingSystem.Models.Employee
 
 @{
-    ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = "EmployeeDetails";
+    Layout = "~/Views/Shared/_LayoutEmployee.cshtml";
 }
 
-<h2>Details</h2>
+<h2>EmployeeDetails</h2>
 
 <div>
     <h4>Employee</h4>
@@ -54,6 +54,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.EmployeeId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Edit","EmployeeEdit", "Employees", new { id = Model.EmployeeId },null) 
+    
 </p>

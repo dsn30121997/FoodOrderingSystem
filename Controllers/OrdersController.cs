@@ -23,9 +23,20 @@ namespace FoodOrderingSystem.Controllers
         public async Task<ActionResult> Index()
         {
             var orders = db.Orders.Include(o => o.Customer);
-             var orders1 = orders.OrderByDescending(o => o.OrderDate);
+            var orders1 = orders.OrderByDescending(o => o.OrderDate);
             return View(await orders.ToListAsync());
         }
+
+        // For Employee
+        // Getting all Orders
+        // GET: Orders
+        public async Task<ActionResult> EmployeeOrdersIndex()
+        {
+            var orders = db.Orders.Include(o => o.Customer);
+            var orders1 = orders.OrderByDescending(o => o.OrderDate);
+            return View(await orders.ToListAsync());
+        }
+
 
 
 
@@ -34,10 +45,16 @@ namespace FoodOrderingSystem.Controllers
         //For getting All Order By single customer
         // Get Orders/MyOrders/2
         // Get Orders/MyOrders/Customer Id
+        //This code retrieves a list of orders for a given customer from a database. 
         public ActionResult MyOrders(int CustomerId)
         {
+            //Find the customer in the database
             Customer customer = db.Customer.Find(CustomerId);
+
+            //Retrieve a list of orders for the customer from the database
             List<Orders> orders = db.Orders.Where(c => c.CustomerId == CustomerId).ToList();
+
+            //Return the list of orders to the view
             return View(orders);
         }
 
@@ -70,9 +87,6 @@ namespace FoodOrderingSystem.Controllers
             ViewBag.CustomerId = new SelectList(db.Customer, "CustomerId", "CustomerName");
             return View();
         }
-
-
-
 
 
 
@@ -128,8 +142,8 @@ namespace FoodOrderingSystem.Controllers
                     db.Cart.Remove(db.Cart.Find(CustomerId, item.ItemId));
                     db.SaveChanges();
                 }
-                
-                
+
+
                 Payment payment = new Payment();
                 payment.OrderId = orders.OrderId;
                 payment.TotalAmount = orders.TotalAmount;
@@ -138,80 +152,118 @@ namespace FoodOrderingSystem.Controllers
 
             }
             return View();
-    }
-
-
-    //For Admin
-    // Getting Edit Page
-    // GET: Orders/Edit/5
-    public async Task<ActionResult> Edit(int? id)
-    {
-        if (id == null)
-        {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
         }
-        Orders orders = await db.Orders.FindAsync(id);
-        if (orders == null)
-        {
-            return HttpNotFound();
-        }
-        ViewBag.CustomerId = new SelectList(db.Customer, "CustomerId", "CustomerName", orders.CustomerId);
-        return View(orders);
-    }
-    //For Admin
-    // POST: Orders/Edit/5
-    // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-    // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<ActionResult> Edit([Bind(Include = "OrderId,CustomerId,TotalAmount,OrderDate,OrderStatus,SpicialInstruction")] Orders orders)
-    {
-        if (ModelState.IsValid)
-        {
-            db.Entry(orders).State = EntityState.Modified;
 
+
+        //For Admin
+        // Getting Edit Page
+        // GET: Orders/Edit/5
+        public async Task<ActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Orders orders = await db.Orders.FindAsync(id);
+            if (orders == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.CustomerId = new SelectList(db.Customer, "CustomerId", "CustomerName", orders.CustomerId);
+            return View(orders);
+        }
+        //For Admin
+        // POST: Orders/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit([Bind(Include = "OrderId,CustomerId,TotalAmount,OrderDate,OrderStatus,SpicialInstruction")] Orders orders)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(orders).State = EntityState.Modified;
+
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            ViewBag.CustomerId = new SelectList(db.Customer, "CustomerId", "CustomerName", orders.CustomerId);
+            return View(orders);
+        }
+
+
+        //For Employee
+        // Getting Edit Page
+        // GET: EmployeeOrdersEdit/Edit/5
+        public async Task<ActionResult> EmployeeOrdersEdit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Orders orders = await db.Orders.FindAsync(id);
+            if (orders == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.CustomerId = new SelectList(db.Customer, "CustomerId", "CustomerName", orders.CustomerId);
+            return View(orders);
+        }
+        //For Employee
+        // POST: EmployeeOrdersEdit/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EmployeeOrdersEdit([Bind(Include = "OrderId,CustomerId,TotalAmount,OrderDate,OrderStatus,SpicialInstruction")] Orders orders)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(orders).State = EntityState.Modified;
+
+                await db.SaveChangesAsync();
+                return RedirectToAction("EmployeeOrdersIndex");
+            }
+            ViewBag.CustomerId = new SelectList(db.Customer, "CustomerId", "CustomerName", orders.CustomerId);
+            return View(orders);
+        }
+
+
+
+
+        // GET: Orders/Delete/5
+        public async Task<ActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Orders orders = await db.Orders.FindAsync(id);
+            if (orders == null)
+            {
+                return HttpNotFound();
+            }
+            return View(orders);
+        }
+
+        // POST: Orders/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteConfirmed(int id)
+        {
+            Orders orders = await db.Orders.FindAsync(id);
+            db.Orders.Remove(orders);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-        ViewBag.CustomerId = new SelectList(db.Customer, "CustomerId", "CustomerName", orders.CustomerId);
-        return View(orders);
-    }
 
-
-
-    // GET: Orders/Delete/5
-    public async Task<ActionResult> Delete(int? id)
-    {
-        if (id == null)
+        protected override void Dispose(bool disposing)
         {
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
-        Orders orders = await db.Orders.FindAsync(id);
-        if (orders == null)
-        {
-            return HttpNotFound();
-        }
-        return View(orders);
     }
-
-    // POST: Orders/Delete/5
-    [HttpPost, ActionName("Delete")]
-    [ValidateAntiForgeryToken]
-    public async Task<ActionResult> DeleteConfirmed(int id)
-    {
-        Orders orders = await db.Orders.FindAsync(id);
-        db.Orders.Remove(orders);
-        await db.SaveChangesAsync();
-        return RedirectToAction("Index");
-    }
-
-    protected override void Dispose(bool disposing)
-    {
-        if (disposing)
-        {
-            db.Dispose();
-        }
-        base.Dispose(disposing);
-    }
-}
 }

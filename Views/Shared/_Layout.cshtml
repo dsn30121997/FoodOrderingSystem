@@ -8,26 +8,38 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            <div class="navbar-dark">
-                 @Html.ActionLink("Food Ordering System", "Login", "Home",  new { area = "" }, new { @class = "navbar-brand" })
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                 </button>
-                <div class="collapse navbar-collapse d-sm-inline-flex ">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li>@Html.ActionLink("Home", "Login", "Home") |</li>
-                        <li>@Html.ActionLink("Register", "Create", "Customers") |</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home") |</li>
+  
 
-                        <li>@Html.ActionLink("ManageWebsite","AdminLogin","Home")</li>
+                <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom bg-dark">
+                    <div class="col-md-3 mb-2 mb-md-0 ">
+                        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none text margin text-white-50 ">
+                            
+                            <h3> Food Ordering System</h3>
+                        </a>
+                    </div>
+                   
+                    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+                        <li>@Html.ActionLink("Home", "Login", "Home") </li>
+                        <li style="margin-left: 10px; margin-right: 10px;">|</li>
+
+                        <li>@Html.ActionLink("Contact", "Contact", "Home") </li>
+                        <li style="margin-left: 10px; margin-right: 10px;">|</li>
+                        <li>@Html.ActionLink("ManageWebsite", "AdminLogin", "Home") </li>
+                        <li style="margin-left: 10px; margin-right: 10px;">|</li>
+                        <li>@Html.ActionLink("Employee", "EmployeeLogin", "Home")</li>
+                        <li style="margin-left: 10px; margin-right: 10px;">|</li>
                     </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
+
+                    <div class="col-md-3 text-end">
+
+                        @Html.ActionLink("Login", "Login", "Home", "", new { @class = "btn btn-outline-success" }) 
+                       
+                        @Html.ActionLink("Register", "Create", "Customers", "", new { @class = "btn btn-outline-primary me-2" })
+                    </div>
+                   
+         
+        </header>
+    
     <div class="container body-content">
         @RenderBody()
         
