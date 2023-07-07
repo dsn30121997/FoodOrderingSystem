@@ -11,13 +11,13 @@
 <table class="table">
 
     <tr>
-        <th>
+        @*<th>
 
             @Html.DisplayNameFor(model => model.CustomerId)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Customer.CustomerName)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.MenuList.ItemId)
         </th>
@@ -40,13 +40,13 @@
         @foreach (var cart in Model)
         {
             <tr>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => cart.CustomerId)
 
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => cart.Customer.CustomerName)
-                </td>
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => cart.ItemId)
                 </td>

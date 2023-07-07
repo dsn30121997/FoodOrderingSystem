@@ -131,7 +131,7 @@ namespace FoodOrderingSystem.Controllers
             {
                 db.Entry(customer).State = EntityState.Modified;
                 await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = customer.CustomerId });
             }
             return View(customer);
         }
